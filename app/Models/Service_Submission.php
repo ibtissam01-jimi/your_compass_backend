@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Service_Submission extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'date', 'status', 'utilisateur_id', 'service_id'];
+    protected $fillable = ['description', 'date', 'status', 'user_id', 'service_id'];
 
     public function utilisateur()
     {
-        return $this->belongsTo(utilisateur::class);
+        return $this->belongsTo(User::class);
     }
 
     public function service()
