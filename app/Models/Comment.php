@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    protected $fillable = ['content', 'publication_date', 'status', 'utilisateur_id', 'service_id', 'guide_id'];
+    protected $fillable = ['content', 'publication_date', 'status', 'user_id', 'service_id', 'guide_id'];
 
     public function user()
     {
-        return $this->belongsTo(Utilisateur::class);
+        return $this->belongsTo(User::class);
     }
 
     public function service()

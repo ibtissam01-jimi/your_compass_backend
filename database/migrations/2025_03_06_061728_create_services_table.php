@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
             $table->string('location');
-            $table->date('added_date');
-            $table->string('website_link');
+            $table->date('creation_date');
+            $table->string('website_link')->nullable();
             $table->foreignId('city_id')->constrained('cities');
             $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();

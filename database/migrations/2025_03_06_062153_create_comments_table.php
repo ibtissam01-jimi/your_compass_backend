@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->text('content');
             $table->date('publication_date');
-            $table->string('status');
-            $table->foreignId('utilisateur_id')->constrained('utilisateurs');
-            $table->foreignId('service_id')->constrained('services');
+            $table->string('status')->nullable();
+            
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->on('services')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }

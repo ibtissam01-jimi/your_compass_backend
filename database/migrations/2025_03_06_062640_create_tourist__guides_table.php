@@ -11,17 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tourist__guides', function (Blueprint $table) {
+        Schema::create('guides', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('surname');
+            $table->string('username')->unique();
             $table->string('cin');
             $table->string('address');
             $table->string('email');
             $table->string('phone_number');
             $table->string('cv');
             $table->string('photo');
-            $table->foreignId('city_id')->constrained('cities');
+
+            
+            $table->unsignedBigInteger('city_id');
+            $table->foreign('city_id')->on('cities')->references('id')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

@@ -16,8 +16,13 @@ return new class extends Migration
             $table->text('message');
             $table->date('send_date');
             $table->string('type');
-            $table->foreignId('utilisateur_id')->constrained('utilisateurs');
-            $table->foreignId('admin_id')->constrained('admins');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('admin_id');
+            $table->foreign('admin_id')->on('admins')->references('id')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
