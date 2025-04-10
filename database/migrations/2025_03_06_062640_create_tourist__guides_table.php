@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('cin');
+            $table->string('description');
+            $table->string('cin')->unique();
             $table->string('address');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('phone_number');
-            $table->string('cv');
-            $table->string('photo');
-
+            $table->string('photo')->nullable();
             
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->on('cities')->references('id')->onDelete('cascade');
