@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('role');
             $table->string('nationality');
             $table->date('birth_date');
-            $table->date('registration_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

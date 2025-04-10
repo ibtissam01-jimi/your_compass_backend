@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'image', 'location'];
+    protected $fillable = ['name', 'description', 'image', 'latitude','longitude'];
 
     public function services()
     {

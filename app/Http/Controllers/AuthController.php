@@ -14,7 +14,7 @@ class AuthController extends Controller
             'name' => 'required|string|min:3',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:3',
-            'role' => 'required|string|in:admin,user,editor'
+            'role' => 'required|string|in:admin,user,business '
         ]);
 
         $user = new User();
@@ -27,14 +27,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        // $user = User::create([
-        //     $request->username,
-        //     $request->email,
-        //     $request->role,
-        //     $request->nationality,
-        //     $request->birth_date,
-        //     'password' => Hash::make($request->password),
-        // ]);
+        
         $token= Auth::login($user);
          
         //$roleController = new RoleController();

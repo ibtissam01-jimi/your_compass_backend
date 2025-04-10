@@ -13,14 +13,25 @@ return new class extends Migration
     {
         Schema::create('service_submissions', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
-            $table->date('date');
-            $table->string('status');
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('description');
+            $table->string('address');
+            $table->string('website');
+            $table->enum('status',['approved', 'pending','rejected']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('city_id');
+            $table->foreign('city_id')->on('cities')->references('id')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->on('categories')->references('id')->onDelete('cascade');
+            
+            
+            $table->string('email');
+            $table->string('phone_number');
 
-            $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->on('services')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }
