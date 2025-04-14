@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service_Submission extends Model
 {
     use HasFactory;
+    protected $table='service_submissions';
     protected $fillable = ['description', 'date', 'status', 'user_id', 'service_id'];
 
     public function utilisateur()

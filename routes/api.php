@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\Tourist_GuideController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,7 @@ Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:api')
 Route::post('refresh', [AuthController::class, 'refresh']);
 
 
-
+Route::post('/new_submission',[SubmissionController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 

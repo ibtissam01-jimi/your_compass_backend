@@ -13,15 +13,15 @@ class AuthController extends Controller
         $request->validate( [
             'name' => 'required|string|min:3',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:3',
-            'role' => 'required|string|in:admin,user,business '
+            'password' => 'required|string|min:4',
+            //'role' => 'required|string|in:admin,user,business '
         ]);
 
         $user = new User();
-        $user->name = $request->username;
+        $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->role = $request->role;
+        $user->role = 'user';
         $user->nationality = $request->nationality;
         $user->birth_date = $request->birth_date;
         $user->password = Hash::make($request->password);
