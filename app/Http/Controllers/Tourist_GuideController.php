@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Tourist_Guide;
 use App\Models\City;
 
-class TouristGuideController extends Controller
+class Tourist_GuideController extends Controller
 {
     /**
      * Affiche la liste des guides touristiques.
      */
     public function index()
     {
-        $guides = Tourist_Guide::with('city')->get();
-        return view('guides.index', ['guides' => $guides]);
+        
+
+         $guides=Tourist_Guide::all();
+         return response()->json(['guides'=>$guides]);
+
     }
 
     /**

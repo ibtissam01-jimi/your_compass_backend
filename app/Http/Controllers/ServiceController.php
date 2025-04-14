@@ -16,7 +16,7 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::with(['city', 'category', 'admin'])->get();
-        return view('services.index', ['services' => $services]);
+        return $services;
     }
 
     /**

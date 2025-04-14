@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\Tourist_GuideController;
+
+Route::get('/cities', [CityController::class, 'index']);
+Route::get('/guides', [Tourist_GuideController::class, 'index']);
+

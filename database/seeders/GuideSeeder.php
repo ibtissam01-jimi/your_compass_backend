@@ -13,7 +13,7 @@ class GuideSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('guides')->insert([
+        DB::table('tourist__guides')->insert([
             'name' => 'mohammed elyaakoubi',
             'description' => 'Hello,my name is mohammed , I am a touristique guide in my home city which is tanger',
             'cin' => 'AB867564',
@@ -24,7 +24,7 @@ class GuideSeeder extends Seeder
             'city_id' => '1',
         ]);
 
-        DB::table('guides')->insert([
+        DB::table('tourist__guides')->insert([
             'name' => 'youssef elkhadiri',
             'description' => 'Hello,my name is youssef , I am a touristique guide in my home city which is Marakkech',
             'cin' => 'MK746354',
@@ -35,7 +35,7 @@ class GuideSeeder extends Seeder
             'city_id' => '2',
         ]);
 
-        DB::table('guides')->insert([
+        DB::table('tourist__guides')->insert([
             'name' => 'mohammed elyaakoubi',
             'description' => 'Hello,my name is mohammed , I am a touristique guide in my home city which is fez',
             'cin' => 'AB867588',
@@ -46,7 +46,7 @@ class GuideSeeder extends Seeder
             'city_id' => '3',
         ]);
 
-        DB::table('guides')->insert([
+        DB::table('tourist__guides')->insert([
             'name' => 'abd el ilah',
             'description' => 'Hello,my name is abdo , I am a touristique guide in my home city which is rabat',
             'cin' => 'AE867564',
@@ -57,7 +57,7 @@ class GuideSeeder extends Seeder
             'city_id' => '4',
         ]);
 
-        DB::table('guides')->insert([
+        DB::table('tourist__guides')->insert([
             'name' => 'houcine almou',
             'description' => 'Hello,my name is houcine , I am a touristique guide in my home city which is agadir',
             'cin' => 'AG764839',
