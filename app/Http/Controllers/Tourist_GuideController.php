@@ -15,7 +15,8 @@ class Tourist_GuideController extends Controller
     {
         
 
-        return response()->json(Tourist_Guide::select('name', 'photo')->get());
+         $guides=Tourist_Guide::all();
+         return response()->json(['guides'=>$guides]);
 
     }
 
