@@ -15,12 +15,22 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->string('location');
-            $table->date('creation_date');
-            $table->string('website_link')->nullable();
-            $table->foreignId('city_id')->constrained('cities');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->string('description');
+            $table->string('address');
+            $table->string('website');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('city_id');
+            $table->foreign('city_id')->on('cities')->references('id')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->on('categories')->references('id')->onDelete('cascade');
+            
+            
+            $table->string('email');
+            $table->string('phone_number');
+
             $table->timestamps();
         });
     }
