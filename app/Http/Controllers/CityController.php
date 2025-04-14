@@ -14,8 +14,10 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::with(['services', 'touristGuides'])->get();
-        return view('cities.index', ['cities' => $cities]);
+       
+        
+            return response()->json(City::select('name', 'image')->get());
+
     }
 
     /**

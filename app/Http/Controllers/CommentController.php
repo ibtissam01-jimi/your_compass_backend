@@ -16,7 +16,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::with(['user', 'service', 'guide'])->get();
-        return view('comments.index', ['comments' => $comments]);
+        return $comments;
     }
 
     /**
