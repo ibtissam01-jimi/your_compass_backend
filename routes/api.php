@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\Tourist_GuideController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,8 @@ Route::post('/new_submission',[SubmissionController::class, 'store']);
 Route::post('/new_test',[SubmissionController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/guides',[Tourist_GuideController::class, 'index']);
 
 
 

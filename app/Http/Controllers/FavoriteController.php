@@ -7,6 +7,7 @@ use App\Models\Favorite;
 use App\Models\Utilisateur;
 use App\Models\Service;
 
+
 class FavoriteController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class FavoriteController extends Controller
     public function index()
     {
         $favorites = Favorite::with(['utilisateur', 'service'])->get();
-        return view('favorites.index', ['favorites' => $favorites]);
+        return  $favorites;
     }
 
     /**
