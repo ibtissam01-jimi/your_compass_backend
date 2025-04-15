@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('description');
             $table->string('address');
             $table->string('website');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+
+            
+            $table->foreignId('submission_id')->constrained('service_submissions')->onDelete('cascade');
+            
             
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->on('cities')->references('id')->onDelete('cascade');

@@ -20,8 +20,8 @@ class ServiceSeeder extends Seeder
             'website' => 'https://www.hyatt.com',
             'address' => 'agadir taghazout',
             'email' => 'hyattregency@gmail.com',
+            'submission_id' => 1,
             'phone_number' => '+212625457896',
-            'user_id' => 2,
             'city_id' => 5,
             'category_id' => 3,
         ]);

@@ -9,10 +9,13 @@ class Service_Submission extends Model
 {
     use HasFactory;
     protected $table='service_submissions';
-    protected $fillable = ['description', 'date', 'status', 'user_id', 'service_id'];
+    protected $fillable = ['description', 'date', 'status', 'user_id'];
 
     public function utilisateur()
     {
         return $this->belongsTo(User::class);
+    }
+    public function service(){
+        return $this->hasOne(Service::class);
     }
 }
