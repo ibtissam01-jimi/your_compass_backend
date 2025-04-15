@@ -32,6 +32,7 @@ Route::post('refresh', [AuthController::class, 'refresh']);
 
 
 Route::post('/new_submission',[SubmissionController::class, 'store']);
+Route::post('/new_test',[SubmissionController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
