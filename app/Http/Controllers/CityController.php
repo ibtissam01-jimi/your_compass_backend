@@ -51,6 +51,7 @@ class CityController extends Controller
             $city->image = $imagePath;
         }
 
+
         $city->save();
         return redirect()->route('cities.index')->with('success', 'Ville ajoutée avec succès.');
     }

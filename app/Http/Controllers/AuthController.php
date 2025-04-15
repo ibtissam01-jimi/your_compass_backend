@@ -42,6 +42,9 @@ class AuthController extends Controller
             ], 201);
    
     }
+    public function test(){
+        return response()->json(['data'=>'test']);
+    }
 
     public function login(Request $request){
         $credentials= $request->only('email','password');

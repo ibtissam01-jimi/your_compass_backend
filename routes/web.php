@@ -18,11 +18,31 @@ Route::get('/', function () {
 });
 
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SubmissionController;
+use Illuminate\Http\Request;
 
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\Tourist_GuideController;
+use App\Http\Controllers\CategorieController;
+
 
 Route::get('/cities', [CityController::class, 'index']);
 Route::get('/guides', [Tourist_GuideController::class, 'index']);
 
+
+Route::post('/register',[AuthController::class,'register']);
+Route::post('/login',[AuthController::class,'login']);
+Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:api');
+Route::post('refresh', [AuthController::class, 'refresh']);
+
+Route::get('/registertest',[AuthController::class,'test']);
+
+Route::post('/new_submission',[SubmissionController::class, 'store']);
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+
+Route::get('/categories', [CategorieController::class, 'index']);

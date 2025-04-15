@@ -13,7 +13,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::with('services')->get();
+        $categories = Categorie::all();
         return $categories;
     }
 
