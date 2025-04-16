@@ -27,10 +27,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\Tourist_GuideController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\ServiceController;
+
 
 
 Route::get('/cities', [CityController::class, 'index']);
 Route::get('/guides', [Tourist_GuideController::class, 'index']);
+
+Route::get('/services', [ServiceController::class, 'index']);
+
+Route::get('/submissions', [SubmissionController::class, 'index']);
 
 
 Route::post('/register',[AuthController::class,'register']);

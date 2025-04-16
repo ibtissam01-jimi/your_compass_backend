@@ -14,9 +14,12 @@ class CityController extends Controller
      */
     public function index()
     {
-       
-        
-            return response()->json(City::select('name', 'image')->get());
+
+            // return response()->json(City::select('name', 'image')->get());
+            
+         $cities=City::all();
+         return $cities;
+
 
     }
 
