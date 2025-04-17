@@ -41,8 +41,18 @@ Route::post('refresh', [AuthController::class, 'refresh']);
 Route::get('/registertest',[AuthController::class,'test']);
 
 Route::post('/new_submission',[SubmissionController::class, 'store']);
+Route::get('/submissions', [SubmissionController::class, 'index']);  // This will fetch all submissions
+
+
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 
 Route::get('/categories', [CategorieController::class, 'index']);
+
+use App\Http\Controllers\UtilisateurController;
+
+Route::get('/utilisateurs', [UtilisateurController::class, 'index']);
+
+
+

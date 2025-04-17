@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class SubmissionController extends Controller
 {
     public function index(){
+        $submissions = Service_Submission::all();
 
+        // Return the submissions as a JSON response
+        return response()->json($submissions);
     }
     public function store(Request $request){
         // $request->validate([
