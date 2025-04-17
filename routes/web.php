@@ -28,6 +28,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\Tourist_GuideController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UtilisateurController;
 
 
 
@@ -37,6 +38,7 @@ Route::get('/guides', [Tourist_GuideController::class, 'index']);
 Route::get('/services', [ServiceController::class, 'index']);
 
 Route::get('/submissions', [SubmissionController::class, 'index']);
+Route::get('/users', [UtilisateurController::class, 'index']);
 
 
 Route::post('/register',[AuthController::class,'register']);

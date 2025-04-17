@@ -15,7 +15,7 @@ class ServiceSeeder extends Seeder
     {
         DB::table('services')->insert([
             'name' => 'Hyatt Regency',
-            'slug' => 'HyattRegency',
+            'slug' => 'Hyatshjsj',
             'description' => 'Le Hyatt Regency Casablanca compte 255 chambres et suites, un spa et hammam, un centre de fitness et une piscine extérieure, ainsi que cinq restaurants',
             'website' => 'https://www.hyatt.com',
             'address' => 'agadir taghazout',
@@ -24,6 +24,39 @@ class ServiceSeeder extends Seeder
             'phone_number' => '+212625457896',
             'city_id' => 5,
             'category_id' => 3,
+            'image' => '/images/cities/m1.jpg'
+        ]);
+
+
+        DB::table('services')->insert([
+            'name' => 'Hyatt Regency',
+            'slug' => 'Hyasjjsj',
+            'description' => 'Le Hyatt Regency Casablanca compte 255 chambres et suites, un spa et hammam, un centre de fitness et une piscine extérieure, ainsi que cinq restaurants',
+            'website' => 'https://www.hyatt.com',
+            'address' => 'agadir taghazout',
+            'email' => 'hyattregency@gmail.com',
+            'submission_id' => 1,
+            'phone_number' => '+212625457896',
+            'city_id' => 5,
+            'category_id' => 3,
+            'image' => '/images/cities/sahara.jpeg'
+        ]);
+
+
+
+        
+        DB::table('services')->insert([
+            'name' => 'Hyatt Regency',
+            'slug' => 'jsi',
+            'description' => 'Le Hyatt Regency Casablanca compte 255 chambres et suites, un spa et hammam, un centre de fitness et une piscine extérieure, ainsi que cinq restaurants',
+            'website' => 'https://www.hyatt.com',
+            'address' => 'agadir taghazout',
+            'email' => 'hyattregency@gmail.com',
+            'submission_id' => 1,
+            'phone_number' => '+212625457896',
+            'city_id' => 5,
+            'category_id' => 3,
+            'image' => '/images/cities/m2.jpg'
         ]);
     }
 }

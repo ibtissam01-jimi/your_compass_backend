@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Utilisateur;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UtilisateurController extends Controller
@@ -13,7 +13,7 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        $utilisateurs = Utilisateur::all();
+        $utilisateurs = User::all();
         return  $utilisateurs;
     }
 
