@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('service_submissions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique();
+            //$table->string('slug')->unique();
             $table->string('description');
             $table->string('address');
             $table->string('website');
@@ -37,7 +37,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique();
+            //$table->string('slug')->unique();
             $table->string('description');
             $table->string('address');
             $table->string('website');

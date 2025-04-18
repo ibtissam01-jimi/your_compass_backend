@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\Tourist_GuideController;
@@ -39,6 +41,10 @@ Route::post('/new_test',[SubmissionController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/guides',[Tourist_GuideController::class, 'index']);
+
+Route::get('/categories', [CategorieController::class, 'index']);
+Route::get('/cities', [CityController::class, 'index']);
+
 
 
 
