@@ -22,7 +22,8 @@ class GuideSeeder extends Seeder
             'email' => 'mohammedtanger@gmail.com',
             'phone_number' => '+212666666666',
             'city_id' => '1',
-            'photo' =>'/images/guides/guide1.jpeg',
+            'photo' => '	
+http://localhost:8000/images/guides/guide1.jpeg',
         ]);
 
         DB::table('tourist__guides')->insert([
@@ -34,7 +35,8 @@ class GuideSeeder extends Seeder
             'email' => 'mohammedxyz@gmail.com',
             'phone_number' => '+21266458756',
             'city_id' => '2',
-            'photo' =>'/images/guides/guide3.jpeg',
+            'photo' => '	
+http://localhost:8000/images/guides/guide3.jpeg',
         ]);
 
         DB::table('tourist__guides')->insert([
@@ -46,7 +48,8 @@ class GuideSeeder extends Seeder
             'email' => 'yassine7498374@gmail.com',
             'phone_number' => '+212661458563',
             'city_id' => '3',
-            'photo' =>'/images/guides/guide1.jpeg',
+            'photo' => '	
+http://localhost:8000/images/guides/guide1.jpeg',
         ]);
 
         DB::table('tourist__guides')->insert([
@@ -58,7 +61,8 @@ class GuideSeeder extends Seeder
             'email' => 'mhguthkldh3444r@gmail.com',
             'phone_number' => '+212767566666',
             'city_id' => '4',
-            'photo' =>'/images/guides/guide2.jpeg',
+            'photo' => '	
+http://localhost:8000/images/guides/guide2.jpeg',
         ]);
 
         DB::table('tourist__guides')->insert([
@@ -70,7 +74,8 @@ class GuideSeeder extends Seeder
             'email' => 'houcine20002025@gmail.com',
             'phone_number' => '+212758932148',
             'city_id' => '5',
-            'photo' =>'/images/guides/guide3.jpeg',
+            'photo' => '	
+http://localhost:8000/images/guides/guide3.jpeg',
         ]);
     }
 }

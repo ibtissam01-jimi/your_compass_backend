@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tourist_Guide;
 use App\Models\City;
+use League\CommonMark\Extension\SmartPunct\EllipsesParser;
 
 class Tourist_GuideController extends Controller
 {
@@ -13,11 +14,10 @@ class Tourist_GuideController extends Controller
      */
     public function index()
     {
-        
 
-         $guides=Tourist_Guide::all();
-         return response()->json(['guides'=>$guides]);
 
+        $guides = Tourist_Guide::all();
+        return response()->json(['guides' => $guides]);
     }
 
     /**
@@ -32,23 +32,62 @@ class Tourist_GuideController extends Controller
     /**
      * Enregistre un nouveau guide touristique.
      */
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'first_name' => 'required|string|max:255',
+    //         'cin' => 'required|string|max:20|unique:tourist__guides,cin',
+    //         'address' => 'nullable|string|max:255',
+    //         'email' => 'required|email|unique:tourist__guides,email',
+    //         'phone_number' => 'required|string|max:15',
+    //         'cv' => 'nullable|string',
+    //         'photo' => 'nullable|string',
+    //         'city_id' => 'required|exists:cities,id',
+    //     ]);
+
+    //     Tourist_Guide::create($request->all());
+
+    //     return redirect()->route('guides.index')->with('success', 'Guide ajouté avec succès.');
+    // }
+
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'first_name' => 'required|string|max:255',
-            'cin' => 'required|string|max:20|unique:tourist__guides,cin',
-            'address' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:tourist__guides,email',
-            'phone_number' => 'required|string|max:15',
-            'cv' => 'nullable|string',
-            'photo' => 'nullable|string',
-            'city_id' => 'required|exists:cities,id',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'username' => 'required|string|max:255',
+        //     'cin' => 'required|string|max:20|unique:tourist__guides,cin',
+        //     'address' => 'nullable|string|max:255',
+        //     'email' => 'required|email|unique:tourist__guides,email',
+        //     'phone_number' => 'required|string|max:15',
+        //     'cv' => 'nullable|string',
+        //     'photo' => 'nullable|string',
+        //     'city_id' => 'required|exists:cities,id',
+        // ]);
 
-        Tourist_Guide::create($request->all());
+        $photo = $request->file('photo');
+        $imageName = time() . '_' . $photo->getClientOriginalName();
 
-        return redirect()->route('guides.index')->with('success', 'Guide ajouté avec succès.');
+        $photo->move(public_path('images/guides'), $imageName);
+
+        $url = url('images/guides/' . $imageName);
+
+        $guide = new Tourist_Guide();
+        $guide->name = $request->name;
+        $guide->username = $request->username;
+        $guide->description = $request->description;
+        $guide->cin = $request->cin;
+        $guide->address = $request->address;
+        $guide->email = $request->email;
+        $guide->phone_number = $request->phone_number;
+        $guide->city_id = $request->city_id;
+        $guide->photo = $url;
+        $guide->save();
+
+        return response()->json([
+            'message' => 'created sucessfully',
+            'status' => '201'
+        ], 201);
     }
 
     /**
