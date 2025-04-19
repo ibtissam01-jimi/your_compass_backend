@@ -18,8 +18,17 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $fillable = ['nationality', 'registration_date','username', 'name', 'email', 'password', 'birth_date'];
-
+    // protected $fillable = ['nationality', 'registration_date','username', 'name', 'email', 'password', 'birth_date'];
+    protected $fillable = [
+        'name',
+        'username',
+        'email',
+        'password',
+        'nationality',
+        'birth_date',
+        'role',
+    ];
+    
     public function favorites()
     {
         return $this->hasMany(Favorite::class);

@@ -19,6 +19,18 @@ class ServiceController extends Controller
         return $services;
     }
 
+
+
+    
+    public function getAllPlaces()
+    {
+        $services = Service::with([ 'category', 'admin'])
+            ->where('category_id', 4)
+            ->get();
+
+        return response()->json($services);
+    }
+
     /**
      * Affiche le formulaire de création d'un service.
      */
@@ -38,23 +50,81 @@ class ServiceController extends Controller
     /**
      * Enregistre un nouveau service.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'location' => 'nullable|string',
-            'added_date' => 'required|date',
-            'website_link' => 'nullable|url',
-            'city_id' => 'required|exists:cities,id',
-            'category_id' => 'required|exists:categories,id',
-            'admin_id' => 'required|exists:admins,id',
-        ]);
+//     public function store(Request $request)
+// {
+//     // Validation des données
 
-        Service::create($request->all());
+//     $categoryId = $request->category_id ?? 1;
+    
+//     // Création d'un nouveau service
+//     $service = new Service();
+//     $service->name = $request->name;
+//     $service->slug = $request->slug;
+//     $service->description = $request->description;
+//     $service->address = $request->address;
+//     $service->website = $request->website;
+//     $service->email = $request->email;
+//     $service->phone_number = $request->phone_number;
+//     $service->city_id = $request->city_id;
 
-        return redirect()->route('services.index')->with('success', 'Service ajouté avec succès.');
+
+//     $service->category_id = $categoryId; 
+
+
+//     // Gestion de l'image
+//     if ($request->hasFile('image')) {
+//         $path = $request->file('image')->store('services', 'public');
+//         $service->image = $path;
+//     }
+
+//     // Enregistrement du service
+//     $service->save();
+
+//     // Retourner une réponse JSON avec un message de succès
+//     return response()->json(['message' => 'Service ajouté avec succès'], 201);
+// }
+
+
+
+
+
+
+public function store(Request $request)
+{
+
+
+    // Récupérer l'ID de la catégorie ou définir la valeur par défaut
+    $categoryId = $request->category_id ?? 1;
+
+    // Création d'un nouveau service
+    $service = new Service();
+    $service->name = $request->name;
+    $service->slug = $request->slug;
+    $service->description = $request->description;
+    $service->address = $request->address;
+    $service->website = $request->website;
+    $service->email = $request->email;
+    $service->phone_number = $request->phone_number;
+    $service->city_id = $request->city_id;
+    $service->category_id = $categoryId; 
+
+    // Gestion de l'image
+    if ($request->hasFile('image')) {
+        // Récupérer le nom de l'image et la stocker dans le dossier 'public/images/services'
+        $imageName = $request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->storeAs('/images/services', $imageName, 'public');
+        
+        // Enregistrer le chemin relatif dans la base de données
+        $service->image = '/images/services/' . $imageName;
     }
+
+    // Enregistrement du service
+    $service->save();
+
+    // Retourner une réponse JSON avec un message de succès
+    return response()->json(['message' => 'Service ajouté avec succès'], 201);
+}
+
 
     /**
      * Affiche un service spécifique.
@@ -114,6 +184,7 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
         $service->delete();
 
-        return redirect()->route('services.index')->with('success', 'Service supprimé avec succès.');
+        // return redirect()->route('services.index')->with('success', 'Service supprimé avec succès.');
+        return response()->json(['message' => 'Deleted']);
     }
 }
