@@ -30,26 +30,19 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nationality' => 'required|string|max:255',
-            'registration_date' => 'required|date',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:utilisateurs,email',
-            'password' => 'required|string|min:6',
-            'birth_date' => 'nullable|date',
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->nationality = $request->nationality;
+        $user->birth_date = $request->birth_date;
+        $user->save();
 
-        Utilisateur::create([
-            'nationality' => $request->nationality,
-            'registration_date' => $request->registration_date,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'birth_date' => $request->birth_date,
-        ]);
-
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur ajouté avec succès.');
+        return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
     }
+    
 
     /**
      * Affiche les détails d'un utilisateur.
@@ -100,11 +93,11 @@ class UtilisateurController extends Controller
     /**
      * Supprime un utilisateur.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $utilisateur = Utilisateur::findOrFail($id);
-        $utilisateur->delete();
-
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur supprimé avec succès.');
+        $evaluator = User::findOrFail($id);
+        $evaluator->delete();
+    
+        return response()->json(['message' => 'Deleted']);
     }
 }

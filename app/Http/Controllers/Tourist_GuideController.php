@@ -32,24 +32,71 @@ class Tourist_GuideController extends Controller
     /**
      * Enregistre un nouveau guide touristique.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'first_name' => 'required|string|max:255',
-            'cin' => 'required|string|max:20|unique:tourist__guides,cin',
-            'address' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:tourist__guides,email',
-            'phone_number' => 'required|string|max:15',
-            'cv' => 'nullable|string',
-            'photo' => 'nullable|string',
-            'city_id' => 'required|exists:cities,id',
-        ]);
+//     public function store(Request $request)
+// {
+//     $guide = new Tourist_Guide();
 
-        Tourist_Guide::create($request->all());
+//     $guide->name = $request->name;
+//     $guide->username = $request->username;
+//     $guide->description = $request->description;
+//     $guide->cin = $request->cin;
+//     $guide->address = $request->address;
+//     $guide->email = $request->email;
+//     $guide->phone_number = $request->phone_number;
+//     $guide->city_id = $request->city_id;
 
-        return redirect()->route('guides.index')->with('success', 'Guide ajouté avec succès.');
+//     if ($request->hasFile('photo')) {
+//         $path = $request->file('photo')->store('guides', 'public');
+//         $guide->photo = $path;
+//     }
+
+//     $guide->save();
+
+//     return response()->json(['message' => 'Guide ajouté avec succès'], 201);
+// }
+
+
+
+
+
+
+public function store(Request $request)
+{
+    // Validation des données (ajoutée ici pour la validation des entrées)
+
+    // Création du guide touristique
+    $guide = new Tourist_Guide();
+
+    $guide->name = $request->name;
+    $guide->username = $request->username;
+    $guide->description = $request->description;
+    $guide->cin = $request->cin;
+    $guide->address = $request->address;
+    $guide->email = $request->email;
+    $guide->phone_number = $request->phone_number;
+    $guide->city_id = $request->city_id;
+
+    // Gestion de la photo
+    if ($request->hasFile('photo')) {
+        // Récupérer le nom de l'image et la stocker dans le dossier 'public/images/guides'
+        $imageName = $request->file('photo')->getClientOriginalName();
+        $path = $request->file('photo')->storeAs('/images/guides', $imageName, 'public');
+        
+        // Enregistrer le chemin relatif dans la base de données
+        $guide->photo = '/images/guides/' . $imageName;
     }
+
+    // Enregistrer le guide dans la base de données
+    $guide->save();
+
+    // Retourner une réponse JSON avec un message de succès
+    return response()->json(['message' => 'Guide ajouté avec succès'], 201);
+}
+
+
+
+
+
 
     /**
      * Affiche un guide spécifique.
@@ -100,9 +147,15 @@ class Tourist_GuideController extends Controller
      */
     public function destroy(string $id)
     {
+        // $guide = Tourist_Guide::findOrFail($id);
+        // $guide->delete();
+
+        // return redirect()->route('guides.index')->with('success', 'Guide supprimé avec succès.');
+
+
         $guide = Tourist_Guide::findOrFail($id);
         $guide->delete();
-
-        return redirect()->route('guides.index')->with('success', 'Guide supprimé avec succès.');
+    
+        return response()->json(['message' => 'Deleted']);
     }
 }

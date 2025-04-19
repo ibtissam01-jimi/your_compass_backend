@@ -41,6 +41,67 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/guides',[Tourist_GuideController::class, 'index']);
 
 
+// routes/api.php
+use App\Http\Controllers\UtilisateurController;
+
+Route::delete('/evaluators/{id}', [UtilisateurController::class, 'destroy']);
+
+use App\Http\Controllers\CityController;
+Route::delete('/cities/{id}', [CityController::class, 'destroy']);
+
+
+use App\Http\Controllers\CategorieController;
+Route::delete('/categories/{id}', [CategorieController::class, 'destroy']);
+
+
+Route::delete('/guides/{id}', [Tourist_GuideController::class, 'destroy']);
+
+
+use App\Http\Controllers\ServiceController;
+Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
+
+
+Route::post('/add-services', [ServiceController::class, 'store']);
+
+
+Route::delete('/service_submission/{id}', [SubmissionController::class, 'destroy']);
+
+
+
+
+
+Route::post('/add-user', [UtilisateurController::class, 'store']);
+
+
+
+
+Route::post('/AddCities', [CityController::class, 'store']);
+
+
+
+Route::post('/add-cat', [CategorieController::class, 'store']);
+
+
+
+
+
+Route::post('AddGuides', [Tourist_GuideController::class, 'store']);
+
+
+// API route to store the city data
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Route::post('/business_submission', [S])

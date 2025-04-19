@@ -42,4 +42,16 @@ class SubmissionController extends Controller
         $submission->save();
 
     }
+
+
+
+
+    public function destroy(string $id)
+    {
+        $service = Service_Submission::findOrFail($id);
+        $service->delete();
+
+        // return redirect()->route('services.index')->with('success', 'Service supprimé avec succès.');
+        return response()->json(['message' => 'Deleted']);
+    }
 }

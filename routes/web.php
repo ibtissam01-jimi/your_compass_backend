@@ -30,7 +30,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UtilisateurController;
 
-
+Route::post('/addUser', [UtilisateurController::class, 'store']);
 
 Route::get('/cities', [CityController::class, 'index']);
 Route::get('/guides', [Tourist_GuideController::class, 'index']);
@@ -38,7 +38,7 @@ Route::get('/guides', [Tourist_GuideController::class, 'index']);
 Route::get('/services', [ServiceController::class, 'index']);
 
 Route::get('/submissions', [SubmissionController::class, 'index']);
-Route::get('/users', [UtilisateurController::class, 'index']);
+Route::get('/evaluators', [UtilisateurController::class, 'index']);
 
 
 Route::post('/register',[AuthController::class,'register']);
@@ -54,3 +54,10 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 
 Route::get('/categories', [CategorieController::class, 'index']);
+
+Route::get('/places', [ServiceController::class, 'getAllPlaces']);
+
+
+
+Route::delete('/evaluators/{id}', [UtilisateurController::class, 'destroy']);
+
