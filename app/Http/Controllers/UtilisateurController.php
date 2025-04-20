@@ -14,7 +14,7 @@ class UtilisateurController extends Controller
     public function index()
     {
         $utilisateurs = User::all();
-        return  $utilisateurs;
+        return response()->json($utilisateurs); // Retourner les utilisateurs en format JSON
     }
 
     /**
@@ -30,25 +30,30 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation des données
         $request->validate([
-            'nationality' => 'required|string|max:255',
-            'registration_date' => 'required|date',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:utilisateurs,email',
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
+            'role' => 'required|string',
+            'nationality' => 'required|string',
             'birth_date' => 'nullable|date',
         ]);
 
-        User::create([
-            'nationality' => $request->nationality,
-            'registration_date' => $request->registration_date,
+        // Création de l'utilisateur
+        $user = User::create([
             'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'nationality' => $request->nationality,
             'birth_date' => $request->birth_date,
         ]);
 
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur ajouté avec succès.');
+        // Retourner une réponse JSON avec un message de succès
+        return response()->json(['message' => 'Utilisateur créé avec succès', 'user' => $user], 201);
     }
 
     /**
@@ -76,36 +81,42 @@ class UtilisateurController extends Controller
     {
         // Valider les données
         $request->validate([
-            'nationality' => 'required|string|max:255',
-            'registration_date' => 'required|date',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:utilisateurs,email,' . $id,
+            'username' => 'required|string|max:255|unique:users,username,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:6',
+            'role' => 'required|string',
+            'nationality' => 'required|string',
             'birth_date' => 'nullable|date',
         ]);
 
+        // Trouver l'utilisateur
         $utilisateur = User::findOrFail($id);
 
+        // Mettre à jour l'utilisateur
         $utilisateur->update([
-            'nationality' => $request->nationality,
-            'registration_date' => $request->registration_date,
             'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $utilisateur->password,
+            'role' => $request->role,
+            'nationality' => $request->nationality,
             'birth_date' => $request->birth_date,
         ]);
 
-        return response()->json($utilisateur, 200); // Retourner une réponse JSON
+        // Retourner une réponse JSON avec l'utilisateur mis à jour
+        return response()->json(['message' => 'Utilisateur mis à jour avec succès', 'user' => $utilisateur], 200);
     }
 
     /**
      * Supprime un utilisateur.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $utilisateur = User::findOrFail($id);
         $utilisateur->delete();
 
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur supprimé avec succès.');
+        // Retourner une réponse JSON avec un message de suppression
+        return response()->json(['message' => 'Utilisateur supprimé avec succès']);
     }
 }

@@ -29,27 +29,34 @@ class CategorieController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
 
-        $categorie = new Categorie();
-        $categorie->name = $request->name;
-        $categorie->description = $request->description;
-
-        // Si une image est téléchargée
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('categories', 'public');
-            $categorie->image = $imagePath;
-        }
-
-        $categorie->save();
-        return redirect()->route('categories.index')->with('success', 'Catégorie créée avec succès.');
+{
+    if ($request->hasFile('image')) {
+        // Récupérer le nom du fichier de l'image
+        $imageName = $request->file('image')->getClientOriginalName();
+        
+        // Stocker l'image dans public/images/categories et obtenir le chemin relatif sans 'public/'
+        $imagePath = $request->file('image')->storeAs('/images/cat', $imageName, 'public');
+        
+        // Enregistrer seulement le chemin relatif dans la base de données
+        $imageRelativePath = '/images/cat/' . $imageName; 
+    } else {
+        $imageRelativePath = null;
     }
 
+    $category = new Categorie();
+    $category->name = $request->name;
+    $category->description = $request->description;
+
+    // Gérer l'upload de l'image
+    $category->image = $imageRelativePath; 
+    $category->save();
+
+
+    $category->save();
+
+    return response()->json(['message' => 'Catégorie ajoutée avec succès', 'category' => $category], 201);
+}
     /**
      * Display the specified resource.
      */
@@ -100,10 +107,18 @@ class CategorieController extends Controller
      */
     public function destroy(string $id)
     {
-        $categorie = Categorie::find($id);
-        $categorie->services()->detach(); // Détacher les services liés à cette catégorie
-        $categorie->delete();
+        // $categorie = Categorie::find($id);
+        // $categorie->services()->detach(); // Détacher les services liés à cette catégorie
+        // $categorie->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Catégorie supprimée avec succès.');
+        // return redirect()->route('categories.index')->with('success', 'Catégorie supprimée avec succès.');
+
+
+
+        $categorie = Categorie::findOrFail($id);
+        $categorie->delete();
+    
+        return response()->json(['message' => 'Deleted']);
     }
+    
 }

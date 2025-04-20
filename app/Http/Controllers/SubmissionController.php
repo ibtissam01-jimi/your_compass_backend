@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service_Submission;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class SubmissionController extends Controller
 {
@@ -18,20 +18,21 @@ class SubmissionController extends Controller
     // Ajouter une nouvelle soumission
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'owner' => 'required|string|max:255',
-            'date' => 'required|date',
-            'status' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone_number' => 'required|string|max:20',
-            'address' => 'required|string|max:255',
-            'website' => 'required|url|max:255',
-        ]);
+        $user_id = Auth::id();
 
-        $submission = Service_Submission::create($data);
+        $submission = new Service_Submission();
+        $submission->name = $request->name;
+        $submission->description = $request->description;
+        $submission->status = 'pending';
+        $submission->website = $request->website;
+        $submission->address = $request->address;
+        $submission->phone_number = $request->phone_number;
+        $submission->email = $request->email;
+        $submission->user_id = $user_id;
+        $submission->city_id = $request->city_id;
+        $submission->category_id = $request->category_id;
+        $submission->save();
+
         return response()->json($submission, 201);
     }
 

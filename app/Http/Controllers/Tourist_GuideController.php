@@ -13,11 +13,8 @@ class Tourist_GuideController extends Controller
      */
     public function index()
     {
-        
-
-         $guides=Tourist_Guide::all();
-         return response()->json(['guides'=>$guides]);
-
+        $guides = Tourist_Guide::all();
+        return response()->json(['guides' => $guides]);
     }
 
     /**
@@ -33,39 +30,39 @@ class Tourist_GuideController extends Controller
      * Enregistre un nouveau guide touristique.
      */
     public function store(Request $request)
-{
-    // Validation des données
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'first_name' => 'required|string|max:255',
-        'cin' => 'required|string|max:20|unique:tourist__guides,cin',
-        'address' => 'nullable|string|max:255',
-        'email' => 'required|email|unique:tourist__guides,email',
-        'phone_number' => 'required|string|max:15',
-        'cv' => 'nullable|mimes:pdf|max:2048',
-        'photo' => 'nullable|image|max:2048',
-        'city_id' => 'required|exists:cities,id',
-    ]);
+    {
+        // Validation des données
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'cin' => 'required|string|max:20|unique:tourist_guides,cin',
+            'address' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:tourist_guides,email',
+            'phone_number' => 'required|string|max:15',
+            'cv' => 'nullable|mimes:pdf|max:2048',
+            'photo' => 'nullable|image|max:2048',
+            'city_id' => 'required|exists:cities,id',
+        ]);
 
-    // Création de l'objet guide
-    $guideData = $request->all();
+        // Création du guide avec les données validées
+        $guideData = $validated;
 
-    // Gestion des fichiers (photo et CV)
-    if ($request->hasFile('photo')) {
-        $photoPath = $request->file('photo')->store('photos', 'public');
-        $guideData['photo'] = $photoPath;
+        // Gestion des fichiers (photo et CV)
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $guideData['photo'] = $photoPath;
+        }
+
+        if ($request->hasFile('cv')) {
+            $cvPath = $request->file('cv')->store('cvs', 'public');
+            $guideData['cv'] = $cvPath;
+        }
+
+        // Création du guide dans la base de données
+        Tourist_Guide::create($guideData);
+
+        return redirect()->route('guides.index')->with('success', 'Guide ajouté avec succès.');
     }
-
-    if ($request->hasFile('cv')) {
-        $cvPath = $request->file('cv')->store('cvs', 'public');
-        $guideData['cv'] = $cvPath;
-    }
-
-    // Création du guide dans la base de données
-    Tourist_Guide::create($guideData);
-
-    return redirect()->route('guides.index')->with('success', 'Guide ajouté avec succès.');
-}
 
     /**
      * Affiche un guide spécifique.
@@ -91,35 +88,38 @@ class Tourist_GuideController extends Controller
      * Met à jour un guide touristique.
      */
     public function update(Request $request, string $id)
-{
-    $guide = Tourist_Guide::findOrFail($id);
+    {
+        $guide = Tourist_Guide::findOrFail($id);
 
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'cin' => 'required|string|max:20|unique:tourist__guides,cin,' . $id,
-        'email' => 'required|email|unique:tourist__guides,email,' . $id,
-        'address' => 'nullable|string|max:255',
-        'phone_number' => 'required|string|max:15',
-        'city_id' => 'required|exists:cities,id',
-        'photo' => 'nullable|image|max:2048',
-        'cv' => 'nullable|mimes:pdf|max:2048',
-    ]);
+        // Validation des données pour la mise à jour
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'cin' => 'required|string|max:20|unique:tourist_guides,cin,' . $id,
+            'email' => 'required|email|unique:tourist_guides,email,' . $id,
+            'address' => 'nullable|string|max:255',
+            'phone_number' => 'required|string|max:15',
+            'city_id' => 'required|exists:cities,id',
+            'photo' => 'nullable|image|max:2048',
+            'cv' => 'nullable|mimes:pdf|max:2048',
+        ]);
 
-    if ($request->hasFile('photo')) {
-        $photoPath = $request->file('photo')->store('photos', 'public');
-        $validated['photo'] = $photoPath;
+        // Mise à jour de l'image si présente
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $validated['photo'] = $photoPath;
+        }
+
+        // Mise à jour du CV si présent
+        if ($request->hasFile('cv')) {
+            $cvPath = $request->file('cv')->store('cvs', 'public');
+            $validated['cv'] = $cvPath;
+        }
+
+        // Mise à jour des informations du guide
+        $guide->update($validated);
+
+        return response()->json(['message' => 'Guide mis à jour avec succès.', 'guide' => $guide]);
     }
-
-    if ($request->hasFile('cv')) {
-        $cvPath = $request->file('cv')->store('cvs', 'public');
-        $validated['cv'] = $cvPath;
-    }
-
-    $guide->update($validated);
-
-    return response()->json(['message' => 'Guide mis à jour avec succès.', 'guide' => $guide]);
-}
-
 
     /**
      * Supprime un guide touristique.
@@ -128,7 +128,7 @@ class Tourist_GuideController extends Controller
     {
         $guide = Tourist_Guide::findOrFail($id);
         $guide->delete();
-
-        return redirect()->route('guides.index')->with('success', 'Guide supprimé avec succès.');
+    
+        return response()->json(['message' => 'Guide supprimé avec succès.']);
     }
 }

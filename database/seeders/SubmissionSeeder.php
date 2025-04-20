@@ -15,8 +15,7 @@ class SubmissionSeeder extends Seeder
     {
         DB::table('service_submissions')->insert([
             'name' => 'Hyatt Regency',
-            'slug' => 'HyattRegency',
-            'description' => 'Le Hyatt Regency Casablanca compte 255 chambres et suites, un spa et hammam, un centre de fitness et une piscine extérieure, ainsi que cinq restaurants',
+            'description' => 'Le Hyatt Regency Casablanca compte 255 chambres et suites...',
             'website' => 'https://www.hyatt.com',
             'address' => 'agadir taghazout',
             'email' => 'hyattregency@gmail.com',
@@ -25,6 +24,8 @@ class SubmissionSeeder extends Seeder
             'user_id' => 2,
             'city_id' => 5,
             'category_id' => 3,
+            'image' => '/images/cities/m1.jpg',
+            
         ]);
     }
 }
