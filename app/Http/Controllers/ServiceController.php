@@ -15,8 +15,19 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::with(['city', 'category', 'admin'])->get();
-        return $services;
+        return response()->json(Service::all());
+    }
+
+    /**
+     * Récupère tous les lieux de services dans une catégorie spécifique.
+     */
+    public function getAllPlaces()
+    {
+        $services = Service::with(['category', 'admin'])
+            ->where('category_id', 4) // Exemple: Afficher les services dans la catégorie 4
+            ->get();
+
+        return response()->json($services);
     }
 
     /**
@@ -40,20 +51,42 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // Validation des données
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => 'required|string|unique:services,slug',
             'description' => 'nullable|string',
-            'location' => 'nullable|string',
-            'added_date' => 'required|date',
-            'website_link' => 'nullable|url',
+            'address' => 'required|string',
+            'website' => 'nullable|url',
+            'email' => 'required|email',
+            'phone_number' => 'required|string',
             'city_id' => 'required|exists:cities,id',
             'category_id' => 'required|exists:categories,id',
-            'admin_id' => 'required|exists:admins,id',
         ]);
 
-        Service::create($request->all());
+        // Création d'un nouveau service
+        $service = new Service();
+        $service->name = $request->name;
+        $service->slug = $request->slug;
+        $service->description = $request->description;
+        $service->address = $request->address;
+        $service->website = $request->website;
+        $service->email = $request->email;
+        $service->phone_number = $request->phone_number;
+        $service->city_id = $request->city_id;
+        $service->category_id = $request->category_id;
 
-        return redirect()->route('services.index')->with('success', 'Service ajouté avec succès.');
+        // Gestion de l'image (si elle est présente)
+        if ($request->hasFile('image')) {
+            $imageName = $request->file('image')->getClientOriginalName();
+            $path = $request->file('image')->storeAs('/images/services', $imageName, 'public');
+            $service->image = '/images/services/' . $imageName;
+        }
+
+        // Enregistrement du service
+        $service->save();
+
+        return response()->json(['message' => 'Service ajouté avec succès'], 201);
     }
 
     /**
@@ -90,17 +123,20 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id);
 
-        $request->validate([
+        // Validation des données
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => 'required|string|unique:services,slug,' . $service->id,
             'description' => 'nullable|string',
-            'location' => 'nullable|string',
-            'added_date' => 'required|date',
-            'website_link' => 'nullable|url',
+            'address' => 'required|string',
+            'website' => 'nullable|url',
+            'email' => 'required|email',
+            'phone_number' => 'required|string',
             'city_id' => 'required|exists:cities,id',
             'category_id' => 'required|exists:categories,id',
-            'admin_id' => 'required|exists:admins,id',
         ]);
 
+        // Mise à jour du service
         $service->update($request->all());
 
         return redirect()->route('services.index')->with('success', 'Service mis à jour avec succès.');
@@ -114,6 +150,6 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
         $service->delete();
 
-        return redirect()->route('services.index')->with('success', 'Service supprimé avec succès.');
+        return response()->json(['message' => 'Service supprimé avec succès.']);
     }
 }

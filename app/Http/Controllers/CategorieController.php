@@ -72,27 +72,28 @@ class CategorieController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $categorie = Categorie::find($id);
+{
+    $categorie = Categorie::find($id);
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        $categorie->name = $request->name;
-        $categorie->description = $request->description;
+    $categorie->name = $request->name;
+    $categorie->description = $request->description;
 
-        // Si une nouvelle image est téléchargée
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('categories', 'public');
-            $categorie->image = $imagePath;
-        }
-
-        $categorie->save();
-        return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès.');
+    // If a new image is uploaded
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('categories', 'public');
+        $categorie->image = $imagePath;
     }
+
+    $categorie->save();
+    return response()->json(['message' => 'Category updated successfully', 'categorie' => $categorie]);
+}
+
 
     /**
      * Remove the specified resource from storage.

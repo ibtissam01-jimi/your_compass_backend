@@ -40,8 +40,11 @@ class Service extends Model
         return $this->belongsTo(Admin::class);
     }
 
-    public function service_submission()
-    {
-        return $this->belongsTo(Service_Submission::class);
-    }
+    public function submission()
+{
+    return $this->belongsTo(Service_Submission::class, 'submission_id');
+}
+
+
+
 }

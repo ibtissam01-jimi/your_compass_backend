@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CityController;
+
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\Tourist_GuideController;
 use Illuminate\Http\Request;
@@ -34,11 +36,92 @@ Route::post('refresh', [AuthController::class, 'refresh']);
 
 
 Route::post('/new_submission',[SubmissionController::class, 'store']);
-Route::post('/new_test',[SubmissionController::class, 'store']);
-
+Route::post('/guide',[Tourist_GuideController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/guides',[Tourist_GuideController::class, 'index']);
+
+Route::get('/categories', [CategorieController::class, 'index']);
+Route::get('/cities', [CityController::class, 'index']);
+
+
+
+// routes/api.php
+use App\Http\Controllers\UtilisateurController;
+
+Route::delete('/evaluators/{id}', [UtilisateurController::class, 'destroy']);
+
+
+Route::delete('/cities/{id}', [CityController::class, 'destroy']);
+
+
+
+Route::delete('/categories/{id}', [CategorieController::class, 'destroy']);
+
+
+Route::delete('/guides/{id}', [Tourist_GuideController::class, 'destroy']);
+
+
+use App\Http\Controllers\ServiceController;
+Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
+
+
+Route::get('/services', [ServiceController::class, 'index']);
+
+
+
+Route::post('/add-services', [ServiceController::class, 'store']);
+
+
+Route::delete('/service_submission/{id}', [SubmissionController::class, 'destroy']);
+
+
+
+
+
+Route::post('/add-user', [UtilisateurController::class, 'store']);
+
+
+
+
+Route::post('/AddCities', [CityController::class, 'store']);
+
+
+
+Route::post('/add-cat', [CategorieController::class, 'store']);
+
+
+
+
+
+Route::post('AddGuides', [Tourist_GuideController::class, 'store']);
+
+use App\Http\Controllers\FavoriteController;
+
+Route::get('/favorites/{utilisateur_id}', [FavoriteController::class, 'index']);
+Route::post('/favorites', [FavoriteController::class, 'store']);
+
+// API route to store the city data
+
+
+
+
+
+
+
+use App\Http\Controllers\DashboardController;
+
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+
+
+use App\Http\Controllers\AdminController;
+
+Route::get('/admin/profile', [AdminController::class, 'getAdminData']);
+Route::put('/admin/profile', [AdminController::class, 'updateAdminData']);
 
 
 

@@ -39,7 +39,7 @@ class UtilisateurController extends Controller
             'birth_date' => 'nullable|date',
         ]);
 
-        Utilisateur::create([
+        User::create([
             'nationality' => $request->nationality,
             'registration_date' => $request->registration_date,
             'name' => $request->name,
@@ -56,7 +56,7 @@ class UtilisateurController extends Controller
      */
     public function show(string $id)
     {
-        $utilisateur = Utilisateur::findOrFail($id);
+        $utilisateur = User::findOrFail($id);
         return view('utilisateurs.show', ['utilisateur' => $utilisateur]);
     }
 
@@ -65,17 +65,16 @@ class UtilisateurController extends Controller
      */
     public function edit(string $id)
     {
-        $utilisateur = Utilisateur::findOrFail($id);
+        $utilisateur = User::findOrFail($id);
         return view('utilisateurs.edit', ['utilisateur' => $utilisateur]);
     }
 
     /**
      * Met à jour un utilisateur.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $utilisateur = Utilisateur::findOrFail($id);
-
+        // Valider les données
         $request->validate([
             'nationality' => 'required|string|max:255',
             'registration_date' => 'required|date',
@@ -84,6 +83,8 @@ class UtilisateurController extends Controller
             'password' => 'nullable|string|min:6',
             'birth_date' => 'nullable|date',
         ]);
+
+        $utilisateur = User::findOrFail($id);
 
         $utilisateur->update([
             'nationality' => $request->nationality,
@@ -94,7 +95,7 @@ class UtilisateurController extends Controller
             'birth_date' => $request->birth_date,
         ]);
 
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur mis à jour avec succès.');
+        return response()->json($utilisateur, 200); // Retourner une réponse JSON
     }
 
     /**
@@ -102,7 +103,7 @@ class UtilisateurController extends Controller
      */
     public function destroy(string $id)
     {
-        $utilisateur = Utilisateur::findOrFail($id);
+        $utilisateur = User::findOrFail($id);
         $utilisateur->delete();
 
         return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur supprimé avec succès.');
