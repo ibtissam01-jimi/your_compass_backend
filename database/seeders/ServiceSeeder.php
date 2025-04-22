@@ -27,6 +27,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 1,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/image19.jpg',
         ]);
 
@@ -42,6 +43,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 2,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/capspartel.jpg',
         ]);
 
@@ -60,6 +62,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 2,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/image5.jpg',
         ]);
 
@@ -76,6 +79,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 2,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/image12.jpg',
         ]);
 
@@ -91,6 +95,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 2,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/mnar.png',
 
         ]);
@@ -106,6 +111,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 1,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/image9.jpg',
         ]);
 
@@ -121,6 +127,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 1,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/image4.jpg',
         ]);
 
@@ -136,6 +143,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 1,
             'city_id' => 1,
             'category_id' => 4,
+            'submission_id'=>1,
             'image'=>'/images/Activities/marqala.jpeg',
         ]);
 
@@ -154,6 +162,7 @@ class ServiceSeeder extends Seeder
             'user_id' => 2,
             'city_id' => 3, // supposons que 3 correspond à Asilah dans ta table cities
             'category_id' => 4, // catégorie "lieux touristiques"
+            'submission_id'=>1,
             'image'=>'/images/Activities/assilah.png',
         ]);
 
@@ -174,6 +183,7 @@ class ServiceSeeder extends Seeder
         'user_id' => 2,
         'city_id' => 2,
         'category_id' => 4,
+        'submission_id'=>1,
         'image'=>'/images/Activities/merr.png',
         ]);
 
@@ -198,6 +208,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/h2.jpeg',
     
 ]);
@@ -213,6 +224,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/h1.jpeg',
 ]);
 
@@ -227,6 +239,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/h3.jpeg',
 ]);
 
@@ -241,6 +254,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/h4.jpeg',
 ]);
 
@@ -255,6 +269,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/h5.jpeg',
 ]);
 
@@ -271,6 +286,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 2,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/img8.png',
     
 ]);
@@ -293,6 +309,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 4,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/img20.png',
 ]);
 
@@ -309,6 +326,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 3,
     'category_id' => 1,
+    'submission_id'=>1,
     'image'=>'/images/hotels/img11.png',
 ]);
 
@@ -330,7 +348,8 @@ DB::table('services')->insert([
     'phone_number' => '+212539934512',
     'user_id' => 2,
     'city_id' => 1,
-    'category_id' => 2, // catégorie "restaurants"
+    'category_id' => 2,
+    'submission_id'=>1, // catégorie "restaurants"
     'image'=>'/images/Restaurants/restaurant9.jpg',
 ]);
 
@@ -345,6 +364,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant7.jpg',
 ]);
 
@@ -359,6 +379,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant10.jpg',
 ]);
 
@@ -373,6 +394,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant11.jpg',
 ]);
 
@@ -387,6 +409,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant17.jpg',
 ]);
 
@@ -404,6 +427,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 2,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant13.jpg',
 ]);
 
@@ -418,6 +442,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 2,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant23.jpg',
 ]);
 
@@ -432,6 +457,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 2,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant3.jpg',
 ]);
 
@@ -448,6 +474,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 3,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant4.jpg',
 ]);
 
@@ -462,6 +489,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 3,
     'category_id' => 2,
+    'submission_id'=>1,
     'image'=>'/images/Restaurants/restaurant14.jpg',
 ]);
 
@@ -482,6 +510,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 3, // catégorie "location de voitures"
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c1.jpg',
 ]);
 
@@ -496,6 +525,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c2.jpg',
 ]);
 
@@ -510,6 +540,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c3.jpg',
 ]);
 
@@ -524,6 +555,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c4.jpg',
 ]);
 
@@ -538,6 +570,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 1,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c5.jpg',
 ]);
 
@@ -554,6 +587,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 2,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c6.jpg',
 ]);
 
@@ -568,6 +602,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 2,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c7.jpg',
 ]);
 
@@ -582,6 +617,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 2,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c8.jpg',
 ]);
 
@@ -598,6 +634,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 3,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c1.jpg',
 ]);
 
@@ -612,6 +649,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 3,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c3.jpg',
 ]);
 
@@ -629,6 +667,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 4,
     'category_id' => 3,
+    'submission_id'=>1,
     'image'=>'/images/RentalCars/c5.jpg',
 ]);
 
@@ -648,6 +687,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 5,
     'category_id' => 1, // catégorie "hôtel"
+    'submission_id'=>1,
     'image'=>'/images/chaoun/h2.jpeg',
 ]);
 
@@ -662,6 +702,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 5,
     'category_id' => 1, // catégorie "hôtel"
+    'submission_id'=>1,
     'image'=>'/images/chaoun/h1.jpeg',
 ]);
 
@@ -676,6 +717,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 5,
     'category_id' => 2, // catégorie "restaurant"
+    'submission_id'=>1,
     'image'=>'/images/chaoun/r1.jpeg',
 ]);
 
@@ -690,6 +732,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 5,
     'category_id' => 2, // catégorie "restaurant"
+    'submission_id'=>1,
     'image'=>'/images/chaoun/r2.jpeg',
 ]);
 
@@ -704,6 +747,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 5,
     'category_id' => 4, // catégorie "lieu touristique"
+    'submission_id'=>1,
     'image'=>'/images/chaoun/a1.jpeg',
 ]);
 
@@ -718,6 +762,7 @@ DB::table('services')->insert([
     'user_id' => 2,
     'city_id' => 5,
     'category_id' => 1, // catégorie "lieu touristique"
+    'submission_id'=>1,
     'image'=>'/images/chaoun/h3.jpeg',
 ]);
 

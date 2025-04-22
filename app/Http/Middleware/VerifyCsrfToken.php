@@ -12,6 +12,12 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'register', // ou '/api/register' si ta route est prefixed
+        'api/*',
+        'new_submission', // Ajoutez ici vos routes spécifiques
+
+           // Exclure toutes les routes de l'API
+        'guides/*',  // Exclure les routes relatives aux guides si besoin
+
     ];
 }

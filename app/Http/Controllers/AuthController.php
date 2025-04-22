@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+
+
     public function register(Request $request){
         $request->validate( [
             'name' => 'required|string|min:3',
@@ -43,6 +46,11 @@ class AuthController extends Controller
    
     }
 
+
+    public function test(){
+        return response()->json(['data'=>'test']);
+    }
+
     public function login(Request $request){
         $credentials= $request->only('email','password');
 
@@ -64,13 +72,26 @@ class AuthController extends Controller
             ], 200);
     }
 
-    public function logout(){
-        Auth::logout();
+    
+
+    public function logout(Request $request)
+{
+    $user = $request->user();
+
+    if ($user) {
+        $user->currentAccessToken()->delete();
+
         return response()->json([
-            'status'=>'success',
-            'message'=>'succesfully logged out'
+            'status' => 'success',
+            'message' => 'Successfully logged out',
         ]);
     }
+
+    return response()->json([
+        'status' => 'error',
+        'message' => 'User not authenticated',
+    ], 401);
+}
 
     public function refresh(){
         return response()->json([
@@ -83,3 +104,12 @@ class AuthController extends Controller
             ], 200);
     }
 }
+
+
+
+
+
+
+
+
+

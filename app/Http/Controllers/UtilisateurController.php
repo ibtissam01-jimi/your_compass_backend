@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Utilisateur;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UtilisateurController extends Controller
@@ -13,7 +13,7 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        $utilisateurs = Utilisateur::all();
+        $utilisateurs = User::all();
         return  $utilisateurs;
     }
 
@@ -30,26 +30,19 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nationality' => 'required|string|max:255',
-            'registration_date' => 'required|date',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:utilisateurs,email',
-            'password' => 'required|string|min:6',
-            'birth_date' => 'nullable|date',
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->nationality = $request->nationality;
+        $user->birth_date = $request->birth_date;
+        $user->save();
 
-        Utilisateur::create([
-            'nationality' => $request->nationality,
-            'registration_date' => $request->registration_date,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'birth_date' => $request->birth_date,
-        ]);
-
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur ajouté avec succès.');
+        return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
     }
+    
 
     /**
      * Affiche les détails d'un utilisateur.
@@ -72,39 +65,48 @@ class UtilisateurController extends Controller
     /**
      * Met à jour un utilisateur.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $utilisateur = Utilisateur::findOrFail($id);
-
-        $request->validate([
-            'nationality' => 'required|string|max:255',
-            'registration_date' => 'required|date',
+        // Validation des données entrantes
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:utilisateurs,email,' . $id,
-            'password' => 'nullable|string|min:6',
-            'birth_date' => 'nullable|date',
+            'username' => 'required|string|max:255|unique:users,username,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required|string|max:255',
+            'nationality' => 'required|string|max:255',
+            'birthDate' => 'required|date',
         ]);
 
-        $utilisateur->update([
-            'nationality' => $request->nationality,
-            'registration_date' => $request->registration_date,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password ? Hash::make($request->password) : $utilisateur->password,
-            'birth_date' => $request->birth_date,
+        // Trouver l'utilisateur par son ID
+        $user = User::find($id);
+
+        // Vérifier si l'utilisateur existe
+        if (!$user) {
+            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
+        }
+
+        // Mettre à jour l'utilisateur
+        $user->update([
+            'name' => $validatedData['name'],
+            'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'role' => $validatedData['role'],
+            'nationality' => $validatedData['nationality'],
+            'birth_date' => $validatedData['birthDate'],
         ]);
 
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur mis à jour avec succès.');
+        // Retourner la réponse avec les données mises à jour
+        return response()->json($user, 200);
     }
 
     /**
      * Supprime un utilisateur.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $utilisateur = Utilisateur::findOrFail($id);
-        $utilisateur->delete();
-
-        return redirect()->route('utilisateurs.index')->with('success', 'Utilisateur supprimé avec succès.');
+        $evaluator = User::findOrFail($id);
+        $evaluator->delete();
+    
+        return response()->json(['message' => 'Deleted']);
     }
 }
