@@ -6,13 +6,17 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\Tourist_GuideController;
+use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 | API Routes
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
@@ -24,15 +28,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/',function(){
+Route::get('/', function () {
     return 'home api page';
 });
 
-Route::post('/register',[AuthController::class,'register']);
-Route::post('/registertest',[AuthController::class,'test']);
-Route::post('/login',[AuthController::class,'login']);
-Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:api');
+// Auth Routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/registertest', [AuthController::class, 'test']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 Route::post('refresh', [AuthController::class, 'refresh']);
+
 
 
 Route::post('/guide',[Tourist_GuideController::class, 'store']);
@@ -86,7 +92,6 @@ Route::put('/services/{id}', [ServiceController::class, 'update']);
 
 Route::post('/add-services', [ServiceController::class, 'store']);
 
-Route::post('/new_submission', [SubmissionController::class, 'store']);
 
 
 Route::delete('/service_submission/{id}', [SubmissionController::class, 'destroy']);
@@ -111,7 +116,42 @@ Route::post('AddGuides', [Tourist_GuideController::class, 'store']);
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
-// API route to store the city data
+// Submission Routes
+Route::post('/new_submission', [SubmissionController::class, 'store']);
+Route::delete('/service_submission/{id}', [SubmissionController::class, 'destroy']);
+
+// Tourist Guide Routes
+
+
+Route::post('AddGuides', [Tourist_GuideController::class, 'store']);
+
+// Category Routes
+Route::get('/categories', [CategorieController::class, 'index']);
+Route::post('/add-cat', [CategorieController::class, 'store']);
+Route::delete('/categories/{id}', [CategorieController::class, 'destroy']);
+
+// City Routes
+Route::get('/cities', [CityController::class, 'index']);
+Route::post('/AddCities', [CityController::class, 'store']);
+Route::delete('/cities/{id}', [CityController::class, 'destroy']);
+
+// Service Routes
+Route::get('/services', [ServiceController::class, 'index']);
+Route::post('/add-services', [ServiceController::class, 'store']);
+Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
+
+// Favorite Routes
+
+Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
+
+
+// Dashboard Routes
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// User Routes
+Route::post('/add-user', [UtilisateurController::class, 'store']);
+Route::delete('/evaluators/{id}', [UtilisateurController::class, 'destroy']);
+
 
 
 
@@ -141,3 +181,8 @@ Route::delete('/submissions/{id}', [SubmissionController::class, 'destroy']);
 
 
 // Route::post('/business_submission', [S])
+
+use App\Http\Controllers\ContactController;
+
+Route::post('/contact', [ContactController::class, 'send']);
+

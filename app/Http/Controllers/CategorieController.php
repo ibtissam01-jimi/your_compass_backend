@@ -78,49 +78,48 @@ class CategorieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-{
-    // Valider les données entrantes
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
 
-    // Trouver la catégorie par son ID
-    $category = Categorie::findOrFail($id);
-
-    // Vérifier si 'name' et 'description' sont présents avant la mise à jour
-    if (!$validatedData['name'] || !$validatedData['description']) {
-        return response()->json(['error' => 'Le nom et la description sont obligatoires.'], 422);
-    }
-
-    // Mettre à jour les champs de la catégorie
-    $category->name = $validatedData['name'];
-    $category->description = $validatedData['description'];
-
-    // Gérer l'upload de l'image si elle est présente
-    if ($request->hasFile('image')) {
-        // Supprimer l'ancienne image si elle existe
-        if ($category->image) {
-            Storage::delete($category->image);
-        }
-
-        // Stocker la nouvelle image et récupérer son chemin
-        $imagePath = $request->file('image')->store('categories', 'public');
-        $category->image = $imagePath;
-    }
-
-    // Sauvegarder les changements dans la base de données
-    $category->save();
-
-    // Retourner la catégorie mise à jour
-    return response()->json($category, 200);
-}
-
-
-
-
+     public function update(Request $request, $id)
+     {
+         // Valider les données entrantes
+         $validatedData = $request->validate([
+             'name' => 'required|string|max:255',
+             'description' => 'required|string',
+             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+         ]);
+     
+         // Trouver la catégorie par son ID
+         $category = Categorie::findOrFail($id);
+     
+         // Vérifier si 'name' et 'description' sont présents avant la mise à jour
+         if (!$validatedData['name'] || !$validatedData['description']) {
+             return response()->json(['error' => 'Le nom et la description sont obligatoires.'], 422);
+         }
+     
+         // Mettre à jour les champs de la catégorie
+         $category->name = $validatedData['name'];
+         $category->description = $validatedData['description'];
+     
+         // Gérer l'upload de l'image si elle est présente
+         if ($request->hasFile('image')) {
+             // Supprimer l'ancienne image si elle existe
+             if ($category->image) {
+                 Storage::delete($category->image);
+             }
+     
+             // Stocker la nouvelle image et récupérer son chemin
+             $imagePath = $request->file('image')->store('categories', 'public');
+             $category->image = $imagePath;
+         }
+     
+         // Sauvegarder les changements dans la base de données
+         $category->save();
+     
+         // Retourner la catégorie mise à jour
+         return response()->json($category, 200);
+     }
+     
+     
     /**
      * Remove the specified resource from storage.
      */

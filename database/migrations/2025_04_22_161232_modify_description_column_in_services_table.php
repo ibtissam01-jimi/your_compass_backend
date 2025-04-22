@@ -10,6 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
+
 {
     Schema::table('services', function (Blueprint $table) {
         $table->text('description')->change(); // Change column type to TEXT
@@ -23,4 +24,5 @@ public function down()
     });
 }
 
+   
 };
