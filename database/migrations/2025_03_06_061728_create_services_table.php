@@ -30,7 +30,7 @@ return new class extends Migration
             
             $table->string('email');
             $table->string('phone_number');
-            $table->string('image');
+            $table->string('image')->nullable()->change();
             $table->timestamps();
         });
         Schema::create('services', function (Blueprint $table) {
