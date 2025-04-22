@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | JWT Authentication Secret
@@ -35,6 +36,7 @@ return [
     */
 
     'keys' => [
+
         /*
         |--------------------------------------------------------------------------
         | Public Key
@@ -116,7 +118,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | Specify the hashing algorithm that will be used to sign the token.
-    |
     | See here: https://github.com/namshi/jose/tree/master/src/Namshi/JOSE/Signer/OpenSSL
     | for possible values.
     |
@@ -211,9 +212,9 @@ return [
     'blacklist_enabled' => env('JWT_BLACKLIST_ENABLED', true),
 
     /*
-    | -------------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     | Blacklist Grace Period
-    | -------------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     |
     | When multiple concurrent requests are made with the same JWT,
     | it is possible that some of them fail, due to token regeneration
@@ -264,6 +265,7 @@ return [
     */
 
     'providers' => [
+
         /*
         |--------------------------------------------------------------------------
         | JWT Provider
