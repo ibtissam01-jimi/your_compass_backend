@@ -28,12 +28,12 @@ Route::get('/guides', [Tourist_GuideController::class, 'index']);
 
 
 
-use App\Http\Controllers\ServiceController;
+// use App\Http\Controllers\ServiceController;
 
-Route::get('/hotels/filtered', [ServiceController::class, 'filteredHotels']);
-Route::get('/Restaurants/filtered', [ServiceController::class, 'filteredRetau']);
-Route::get('/RentalCars/filtered', [ServiceController::class, 'filteredCars']);
-Route::get('/Activities/filtered', [ServiceController::class, 'filteredActivities']);
+// Route::get('/hotels/filtered', [ServiceController::class, 'filteredHotels']);
+// Route::get('/Restaurants/filtered', [ServiceController::class, 'filteredRetau']);
+// Route::get('/RentalCars/filtered', [ServiceController::class, 'filteredCars']);
+// Route::get('/Activities/filtered', [ServiceController::class, 'filteredActivities']);
 
 
 

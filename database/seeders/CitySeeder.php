@@ -30,24 +30,34 @@ class CitySeeder extends Seeder
         ]);
 
         DB::table('cities')->insert([
-            'name' => 'Fez',
+            'name' => 'Assilah',
             'description' => 'Home to one of the oldest universities in the world, Fez is a cultural and spiritual capital known for its ancient medina and artisans.',
              'image' => 'images/cities/m3.jpg',
              'location' => '35.767234,-5.799750' 
         ]);
 
+
+
         DB::table('cities')->insert([
-            'name' => 'Rabat',
+            'name' => 'Essaouira',
+            'description' => 'A beach resort city on the Atlantic Ocean, Agadir is popular for its sunny weather, seaside promenade, and laid-back vibe.',
+            'image' => 'images/cities/m5.jpg',
+            'location' => '35.767234,-5.799750' 
+        ]);
+
+
+        DB::table('cities')->insert([
+            'name' => 'Chefchaoun',
             'description' => 'The capital of Morocco, Rabat is a coastal city with historical landmarks, modern architecture, and political institutions.',
             'image' => 'images/cities/m4.jpg',
             'location' => '35.767234,-5.799750' 
         ]);
 
-        DB::table('cities')->insert([
-            'name' => 'Agadir',
-            'description' => 'A beach resort city on the Atlantic Ocean, Agadir is popular for its sunny weather, seaside promenade, and laid-back vibe.',
-            'image' => 'images/cities/m5.jpg',
-            'location' => '35.767234,-5.799750' 
-        ]);
+
+
+
+
+
+        
     }
 }
