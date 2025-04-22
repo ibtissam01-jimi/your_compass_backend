@@ -10,17 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::table('services', function (Blueprint $table) {
-        $table->foreignId('submission_id')->nullable()->constrained('service_submissions')->onDelete('cascade')->change();
-    });
-}
+    {
+        Schema::table('services', function (Blueprint $table) {
+            
+            $table->unsignedBigInteger('submission_id')->nullable()->change();
+        });
+    }
 
-public function down()
-{
-    Schema::table('services', function (Blueprint $table) {
-        $table->foreignId('submission_id')->constrained('service_submissions')->onDelete('cascade')->change();
-    });
-}
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::table('services', function (Blueprint $table) {
+            
+            $table->unsignedBigInteger('submission_id')->nullable(false)->change();
+        });
+    }
 };

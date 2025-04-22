@@ -6,16 +6,15 @@ use App\Models\Favorite;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
-
 {
     public function index($utilisateur_id)
-{
-    $favorites = Favorite::with('service') // relation avec Service
-        ->where('utilisateur_id', $utilisateur_id)
-        ->get();
+    {
+        $favorites = Favorite::with('service') // Charge la relation service
+            ->where('utilisateur_id', $utilisateur_id)
+            ->get();
 
-    return response()->json($favorites);
-}
+        return response()->json($favorites);
+    }
 
     public function store(Request $request)
     {
@@ -37,4 +36,11 @@ class FavoriteController extends Controller
         return response()->json(['message' => 'Ajouté aux favoris !']);
     }
 
+    public function destroy($id)
+    {
+        $favorite = Favorite::findOrFail($id);
+        $favorite->delete();
+
+        return response()->json(['message' => 'Favori supprimé avec succès.']);
+    }
 }

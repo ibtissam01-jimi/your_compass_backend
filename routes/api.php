@@ -67,6 +67,7 @@ Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 // Favorite Routes
 Route::get('/favorites/{utilisateur_id}', [FavoriteController::class, 'index']);
 Route::post('/favorites', [FavoriteController::class, 'store']);
+Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
 
 // Admin Routes
 Route::get('/admin/profile', [AdminController::class, 'getAdminData']);
@@ -79,3 +80,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::post('/add-user', [UtilisateurController::class, 'store']);
 Route::delete('/evaluators/{id}', [UtilisateurController::class, 'destroy']);
 
+
+
+use App\Http\Controllers\ContactController;
+
+Route::post('/contact', [ContactController::class, 'send']);
