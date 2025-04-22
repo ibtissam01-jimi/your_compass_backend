@@ -24,7 +24,7 @@ class SubmissionSeeder extends Seeder
             'user_id' => 2,
             'city_id' => 5,
             'category_id' => 3,
-            'image' => '/images/cities/m1.jpg',
+           
             
         ]);
     }

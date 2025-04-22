@@ -61,7 +61,7 @@ Route::get('/cities', [CityController::class, 'index']);
 Route::put('categories/{id}', [CategorieController::class, 'update']);
 
 // routes/api.php
-use App\Http\Controllers\UtilisateurController;
+
 
 Route::delete('/evaluators/{id}', [UtilisateurController::class, 'destroy']);
 
@@ -85,7 +85,6 @@ Route::delete('/categories/{id}', [CategorieController::class, 'destroy']);
 Route::delete('/guides/{id}', [Tourist_GuideController::class, 'destroy']);
 
 
-use App\Http\Controllers\ServiceController;
 Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 
 Route::put('/services/{id}', [ServiceController::class, 'update']);
@@ -126,9 +125,8 @@ Route::delete('/service_submission/{id}', [SubmissionController::class, 'destroy
 Route::post('AddGuides', [Tourist_GuideController::class, 'store']);
 
 // Category Routes
-Route::get('/categories', [CategorieController::class, 'index']);
 Route::post('/add-cat', [CategorieController::class, 'store']);
-Route::delete('/categories/{id}', [CategorieController::class, 'destroy']);
+
 
 // City Routes
 Route::get('/cities', [CityController::class, 'index']);
@@ -154,16 +152,12 @@ Route::delete('/evaluators/{id}', [UtilisateurController::class, 'destroy']);
 
 
 
-
-use App\Http\Controllers\FavoriteController;
-
 Route::get('/favorites/{utilisateur_id}', [FavoriteController::class, 'index']);
 Route::post('/favorites', [FavoriteController::class, 'store']);
 
 // // Admin Routes
 
 
-use App\Http\Controllers\AdminController;
 Route::get('/admin/profile', [AdminController::class, 'getAdminData']);
 Route::put('/admin/profile', [AdminController::class, 'updateAdminData']);
 
